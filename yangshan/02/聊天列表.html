@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聊天列表</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0；
+    }
+    
+    #app ul li {
+        list-style: none;
+    }
+    
+    #app ul {
+        position: absolute;
+        margin-left: -35px
+    }
+    
+    #wrap {
+        margin: 100px 500px;
+        widows: 500px;
+        height: 500px;
+    }
+    
+    #app {
+        width: 300px;
+        height: 480px;
+        border: 1px solid black;
+        border-radius: 10px;
+        position: absolute;
+        overflow: auto;
+    }
+    
+    #text {
+        margin-left: 75px;
+        margin-top: 410px;
+        position: absolute;
+        width: 160px;
+        height: 30px;
+        border: 1px solid black;
+        border-radius: 10px;
+        text-align: none;
+    }
+    
+    #send {
+        position: absolute;
+        margin-top: 413px;
+        margin-left: 245px;
+        width: 50px;
+        height: 30px;
+    }
+</style>
+
+<body>
+    <div id="wrap">
+        <div id="app">
+            <ul>
+                <li v-for="(item,index) in list">{{item}}
+                    <button @click="del(index)">删除</button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <textarea id="text" v-model="text"></textarea>
+            <button id="send" v-on:click="click">发送</button>
+        </div>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#wrap",
+            data: {
+                text: "",
+                list: []
+            },
+            methods: {
+                click() {
+                    if (this.text != "")
+                        this.list.push(this.text);
+                    this.text = "";
+                },
+                del(index) {
+                    this.list.splice(index, 1);
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
